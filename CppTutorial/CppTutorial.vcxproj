@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Static.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Log.h" />
