@@ -1,34 +1,43 @@
 #include <iostream>
+#include <array>
+#include <string>
 
 using namespace std;
 
-
-class Actor
+class Entity
 {
 public:
-	int X;
-	int Y;
-	int Z;
+	static const int sizeNumbers = 6;
+	int numbers[sizeNumbers];
+	int size = sizeNumbers;
+	const char* Name;
 
-	virtual void Move(int x, int y, int z)
+	Entity(const char* name) : Name(name)
 	{
-		X += x;
-		Y += y;
-		Z += z;
+		for (int i = 0; i < sizeNumbers; i++)
+		{
+			numbers[i] = 0;
+		}
 	}
+
+	void GetName()
+	{
+		cout << Name << endl;
+	}
+
+
 };
 
-class Vehicle : public Actor
-{
-	int Speed;
-	void Move(int x, int y, int z) override
-	{
-		X += x * Speed;
-		Y += y * Speed;
-		Z += z * Speed;
-	}
-};
 
 int main()
 {
+	const Entity* entityPtr;
+	{
+		Entity* entity = new Entity("Mahdi");
+		entityPtr = entity;
+		entity->GetName();
+		delete entity;
+	}
+
+	cin.get();
 }
