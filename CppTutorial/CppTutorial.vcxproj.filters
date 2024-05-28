@@ -24,9 +24,15 @@
     <ClCompile Include="src\Static.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\String.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

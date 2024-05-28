@@ -1,43 +1,35 @@
 #include <iostream>
-#include <array>
-#include <string>
-
+#include <vector>
 using namespace std;
 
-class Entity
+
+
+struct Vertex
 {
-public:
-	static const int sizeNumbers = 6;
-	int numbers[sizeNumbers];
-	int size = sizeNumbers;
-	const char* Name;
+	float X, Y, Z;
 
-	Entity(const char* name) : Name(name)
+	Vertex(float x, float y, float z)
+		: X(x), Y(y), Z(z) {}
+
+	Vertex(const Vertex& vert)
+		: X(vert.X), Y(vert.Y), Z(vert.Z)
 	{
-		for (int i = 0; i < sizeNumbers; i++)
-		{
-			numbers[i] = 0;
-		}
+		static int counter = 0;
+		cout << "Coopied!" << endl;
+		counter++;
+		cout << counter << endl;
 	}
-
-	void GetName()
-	{
-		cout << Name << endl;
-	}
-
-
 };
 
+ostream& operator<<(ostream& stream, Vertex& v)
+{
+	stream << v.X << ", " << v.Y << ", " << v.Z;
+	return stream;
+}
 
 int main()
 {
-	const Entity* entityPtr;
-	{
-		Entity* entity = new Entity("Mahdi");
-		entityPtr = entity;
-		entity->GetName();
-		delete entity;
-	}
+	
 
 	cin.get();
 }
