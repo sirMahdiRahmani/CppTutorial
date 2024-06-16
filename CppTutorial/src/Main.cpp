@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <GLFW/glfw3.h>
 using namespace std;
 
 
@@ -30,6 +31,7 @@ ostream& operator<<(ostream& stream, Vertex& v)
 int main()
 {
 	
-
+	int a = glfwInit();
+	cout << a << endl;
 	cin.get();
 }
