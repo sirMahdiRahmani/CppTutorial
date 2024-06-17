@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <GLFW/glfw3.h>
 using namespace std;
 
 
@@ -33,11 +34,8 @@ ostream& operator<<(ostream& stream, Vertex& v)
 
 int main()
 {
-	shared_ptr<Vertex> vertex2;
-	{
-		shared_ptr<Vertex> vertex = make_shared<Vertex>(1,2,4);
-		vertex2 = vertex;
-	}
-	cout << *vertex2 << endl;
+	
+	int a = glfwInit();
+	cout << a << endl;
 	cin.get();
 }
