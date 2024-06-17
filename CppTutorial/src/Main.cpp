@@ -19,6 +19,10 @@ struct Vertex
 		counter++;
 		cout << counter << endl;
 	}
+	~Vertex() 
+	{
+		cout << "Object Destroyed!" << endl;
+	}
 };
 
 ostream& operator<<(ostream& stream, Vertex& v)
@@ -29,7 +33,11 @@ ostream& operator<<(ostream& stream, Vertex& v)
 
 int main()
 {
-	
-
+	shared_ptr<Vertex> vertex2;
+	{
+		shared_ptr<Vertex> vertex = make_shared<Vertex>(1,2,4);
+		vertex2 = vertex;
+	}
+	cout << *vertex2 << endl;
 	cin.get();
 }
