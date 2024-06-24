@@ -1,41 +1,23 @@
 #include <iostream>
-#include <vector>
-#include <GLFW/glfw3.h>
-using namespace std;
 
-
-
-struct Vertex
+struct Values
 {
-	float X, Y, Z;
-
-	Vertex(float x, float y, float z)
-		: X(x), Y(y), Z(z) {}
-
-	Vertex(const Vertex& vert)
-		: X(vert.X), Y(vert.Y), Z(vert.Z)
-	{
-		static int counter = 0;
-		cout << "Coopied!" << endl;
-		counter++;
-		cout << counter << endl;
-	}
-	~Vertex() 
-	{
-		cout << "Object Destroyed!" << endl;
-	}
+	float ValueX, ValueY;
 };
 
-ostream& operator<<(ostream& stream, Vertex& v)
+float X, Y;
+
+static Values ReturnValues()
 {
-	stream << v.X << ", " << v.Y << ", " << v.Z;
-	return stream;
+	X = 1;
+	Y = 5;
+
+	return { X, Y };
 }
+
 
 int main()
 {
-	
-	int a = glfwInit();
-	cout << a << endl;
-	cin.get();
+	Values values = ReturnValues();
+	std::cout << values.ValueX << std::endl;
 }
