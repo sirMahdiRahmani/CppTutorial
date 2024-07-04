@@ -1,41 +1,37 @@
 #include <iostream>
+#include <string>
 #include <vector>
-#include <GLFW/glfw3.h>
-using namespace std;
+#include <tuple>
 
 
-
-struct Vertex
+const std::vector<std::tuple<std::string, int>> GetNameAndAge()
 {
-	float X, Y, Z;
+	std::vector<std::tuple<std::string, int>>* NameAndAge = new std::vector<std::tuple<std::string, int>>;
+	
+	std::tuple<std::string, int> Mahdi = std::make_tuple<std::string, int>("Mahdi", 19); // we can use the type to store variable
+	auto Dani = std::make_tuple<std::string, int>("Daniyal", 30); // or we can use auto to store variable (Much Cleaner)
+	
+	NameAndAge->reserve(2);
+	NameAndAge->emplace_back(Mahdi);
+	NameAndAge->emplace_back(Dani);
+	return *NameAndAge;
+}	
 
-	Vertex(float x, float y, float z)
-		: X(x), Y(y), Z(z) {}
-
-	Vertex(const Vertex& vert)
-		: X(vert.X), Y(vert.Y), Z(vert.Z)
-	{
-		static int counter = 0;
-		cout << "Coopied!" << endl;
-		counter++;
-		cout << counter << endl;
-	}
-	~Vertex() 
-	{
-		cout << "Object Destroyed!" << endl;
-	}
-};
-
-ostream& operator<<(ostream& stream, Vertex& v)
+std::ostream& operator<<(std::ostream& stream, std::vector<std::tuple<std::string, int>>& NameAndAge) 
 {
-	stream << v.X << ", " << v.Y << ", " << v.Z;
+	for(int i = 0; i < NameAndAge.size(); i++)
+	{
+		stream << std::get<0>(NameAndAge[i]) << ", " << std::get<1>(NameAndAge[i])<< std::endl;
+	}
 	return stream;
 }
 
 int main()
 {
+	auto NameAndAge =  GetNameAndAge(); // We Can use auto (Much Cleaner)
+	std::vector<std::tuple<std::string, int>> NameAndAge2 =  GetNameAndAge(); // Or We Can use exact type (both work same way)
 	
-	int a = glfwInit();
-	cout << a << endl;
-	cin.get();
+	std::cout << NameAndAge << std::endl;
+	std::cout << NameAndAge2 << std::endl;
 }
+
