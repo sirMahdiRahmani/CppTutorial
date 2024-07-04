@@ -1,6 +1,7 @@
 #include <iostream>
-using namespace std;
+#include "String.h"
 
+using namespace std;
 
 class String
 {
