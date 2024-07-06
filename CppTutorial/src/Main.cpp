@@ -3,35 +3,38 @@
 #include <vector>
 #include <tuple>
 
-
-const std::vector<std::tuple<std::string, int>> GetNameAndAge()
+std::string reverse_words(std::string text)
 {
-	std::vector<std::tuple<std::string, int>>* NameAndAge = new std::vector<std::tuple<std::string, int>>;
-	
-	std::tuple<std::string, int> Mahdi = std::make_tuple<std::string, int>("Mahdi", 19); // we can use the type to store variable
-	auto Dani = std::make_tuple<std::string, int>("Daniyal", 30); // or we can use auto to store variable (Much Cleaner)
-	
-	NameAndAge->reserve(2);
-	NameAndAge->emplace_back(Mahdi);
-	NameAndAge->emplace_back(Dani);
-	return *NameAndAge;
-}	
+	text = text + " ";
+	std::vector<std::string> split_text;
+	std::string NewString = "";
 
-std::ostream& operator<<(std::ostream& stream, std::vector<std::tuple<std::string, int>>& NameAndAge) 
-{
-	for(int i = 0; i < NameAndAge.size(); i++)
+	std::string reverseWord = "";
+
+	for (int i = 0; i < text.size(); i++)
 	{
-		stream << std::get<0>(NameAndAge[i]) << ", " << std::get<1>(NameAndAge[i])<< std::endl;
+		if (text[i] != ' ')
+		{
+			reverseWord = reverseWord + text[i];
+		}
+		else
+		{
+			split_text.emplace_back(reverseWord);
+			reverseWord = "";
+		}
 	}
-	return stream;
+
+	for (std::string s : split_text)
+	{
+		std::reverse(s.begin(), s.end());
+		NewString = NewString + s + " ";
+	}
+	return NewString.substr(0, NewString.size() - 1);
 }
 
 int main()
 {
-	auto NameAndAge =  GetNameAndAge(); // We Can use auto (Much Cleaner)
-	std::vector<std::tuple<std::string, int>> NameAndAge2 =  GetNameAndAge(); // Or We Can use exact type (both work same way)
-	
-	std::cout << NameAndAge << std::endl;
-	std::cout << NameAndAge2 << std::endl;
+	auto text = reverse_words("The quick brown fox jumps over the lazy dog.");
+	std::cout << text;
 }
 
