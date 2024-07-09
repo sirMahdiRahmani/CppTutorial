@@ -2,39 +2,35 @@
 #include <string>
 #include <vector>
 #include <tuple>
+#include <chrono>
+#include "Print.h"
 
-std::string reverse_words(std::string text)
+
+int Add(int a, int b) {
+    return a + b;
+}
+
+void GetResult(int a ,int b, int(*addfunc)(int, int))
 {
-	text = text + " ";
-	std::vector<std::string> split_text;
-	std::string NewString = "";
-
-	std::string reverseWord = "";
-
-	for (int i = 0; i < text.size(); i++)
-	{
-		if (text[i] != ' ')
-		{
-			reverseWord = reverseWord + text[i];
-		}
-		else
-		{
-			split_text.emplace_back(reverseWord);
-			reverseWord = "";
-		}
-	}
-
-	for (std::string s : split_text)
-	{
-		std::reverse(s.begin(), s.end());
-		NewString = NewString + s + " ";
-	}
-	return NewString.substr(0, NewString.size() - 1);
+	std::cout << addfunc(a ,b) << std::endl;
 }
 
 int main()
 {
-	auto text = reverse_words("The quick brown fox jumps over the lazy dog.");
-	std::cout << text;
-}
+    // Start the timer
+    auto start = std::chrono::high_resolution_clock::now();
 
+    int(*add)(int,int) = Add;
+
+    print("Mahdi");
+    GetResult(5, 4, add);
+
+
+    // End the timer
+    auto end = std::chrono::high_resolution_clock::now();
+    // Calculate the duration
+    std::chrono::duration<double> duration = end - start;
+    // Print the duration in seconds
+    std::cout << "Execution time: " << duration.count() << " seconds." << std::endl;
+    return 0;
+}
