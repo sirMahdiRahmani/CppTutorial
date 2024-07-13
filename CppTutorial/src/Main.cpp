@@ -1,25 +1,17 @@
 #include <iostream>
-#include "Timer.h"
+#include <algorithm>
+#include <vector>
+#include <functional>
+
 
 int main()
 {
-	Timer timer;
-	int* Array = new int[5]; // defining single dimensional array of five pointer to integers
+	std::vector<int> vector = { 4,2,1,3,5 };
 
-	int** Array2D = new int*[5]; // defining 2 dimensional array of five pointer to pointer to integer
+	std::sort(vector.begin(), vector.end(), [](int a, int b) { return a > b; });
 
-	for (int i = 0; i < 5; i++)
+	for (int value : vector)
 	{
-		Array2D[i] = new int[5]; // initialize the pointer to the array of five pointer to integers
-		for (int j = 0; j < 5; j++) 
-		{
-			Array2D[i][j] = 2;
-		}
+		std::cout << value << std::endl;
 	}
-
-	for (int i = 0; i < 5; i++)
-	{
-		delete[] Array2D[i];
-	}
-	delete[] Array2D;
 }
