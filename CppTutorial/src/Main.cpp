@@ -1,17 +1,34 @@
 #include <iostream>
-#include <algorithm>
-#include <vector>
-#include <functional>
 
+struct Vector2
+{
+	float x, y;
+};
+
+struct Vector4
+{
+	union
+	{
+		struct
+		{
+			float x, y, z, w;
+		};
+
+		struct
+		{
+			Vector2 a, b;
+		};
+	};
+};
+
+void PrintVector2(const Vector2& vector)
+{
+	std::cout << vector.x << ", " << vector.y << std::endl;
+}
 
 int main()
 {
-	std::vector<int> vector = { 4,2,1,3,5 };
-
-	std::sort(vector.begin(), vector.end(), [](int a, int b) { return a > b; });
-
-	for (int value : vector)
-	{
-		std::cout << value << std::endl;
-	}
+	Vector4 vector4 = { 1,2,3,4 };
+	PrintVector2(vector4.a);
+	PrintVector2(vector4.b);
 }
