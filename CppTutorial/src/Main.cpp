@@ -1,34 +1,54 @@
 #include <iostream>
 
-struct Vector2
+class Base
 {
-	float x, y;
-};
-
-struct Vector4
-{
-	union
+public:
+	Base()
 	{
-		struct
-		{
-			float x, y, z, w;
-		};
+		std::cout << "Base Constructor\n";
+	}
 
-		struct
-		{
-			Vector2 a, b;
-		};
-	};
+	virtual ~Base()
+	{
+		std::cout << "Base Destructor\n";
+	}
 };
 
-void PrintVector2(const Vector2& vector)
+class Derived : public Base
 {
-	std::cout << vector.x << ", " << vector.y << std::endl;
-}
+public:
+	Derived()
+	{
+		std::cout << "Derived Constructor\n";
+	}
+
+	void PrintHello()
+	{
+		std::cout << "Hello" << std::endl;
+	}
+
+	~Derived()
+	{
+		std::cout << "Derived Destructor\n";
+	}
+};
 
 int main()
 {
-	Vector4 vector4 = { 1,2,3,4 };
-	PrintVector2(vector4.a);
-	PrintVector2(vector4.b);
+	double numD = 6.56;
+	int numI = (int)numD;
+	std::cout << numD << " ," << numI << std::endl;
+	// Static Casting
+
+	Base* base = new Derived();
+	Derived* derived = (Derived*)base;
+	// Reinterpret Casting (Type Punnning)
+
+	const int& num = 54;
+	int* number = (int*)(&num);
+	*number = 89;
+	std::cout << num << std::endl;
+	// Const Casting
+
+	std::cin.get();
 }
