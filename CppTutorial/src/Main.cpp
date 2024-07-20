@@ -1,54 +1,23 @@
 #include "pch.h"
 
-class Base
+class Entity
 {
-public:
-	Base()
-	{
-		std::cout << "Base Constructor\n";
-	}
-
-	virtual ~Base()
-	{
-		std::cout << "Base Destructor\n";
-	}
+	virtual void PrintName() {}
 };
 
-class Derived : public Base
-{
-public:
-	Derived()
-	{
-		std::cout << "Derived Constructor\n";
-	}
+class Player : public Entity
+{};
 
-	void PrintHello()
-	{
-		std::cout << "Hello" << std::endl;
-	}
-
-	~Derived()
-	{
-		std::cout << "Derived Destructor\n";
-	}
-};
+class Enemy : public Entity
+{};
 
 int main()
 {
-	double numD = 6.56;
-	int numI = (int)numD;
-	std::cout << numD << " ," << numI << std::endl;
-	// Static Casting
+	Entity* player = new Player();
+	Entity* enemy = new Enemy();
 
-	Base* base = new Derived();
-	Derived* derived = (Derived*)base;
-	// Reinterpret Casting (Type Punnning)
-
-	const int& num = 54;
-	int* number = (int*)(&num);
-	*number = 89;
-	std::cout << num << std::endl;
-	// Const Casting
+	Player* p0 = dynamic_cast<Player*>(player); // it will return actuall player pointer and store it.
+	Player* p1 = dynamic_cast<Player*>(enemy); // it will return nullptr and is not valid.
 
 	std::cin.get();
 }
