@@ -3,8 +3,7 @@
 
 struct Timer
 {
-    std::chrono::time_point<std::chrono::steady_clock> start, end;
-    std::chrono::duration<float> duration;
+    std::chrono::time_point<std::chrono::steady_clock> startPoint, endPoint;
 
     Timer();
 

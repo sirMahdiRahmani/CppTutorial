@@ -1,23 +1,41 @@
 #include "pch.h"
 
-class Entity
+struct Vector2
 {
-	virtual void PrintName() {}
+	float x, y;
 };
-
-class Player : public Entity
-{};
-
-class Enemy : public Entity
-{};
 
 int main()
 {
-	Entity* player = new Player();
-	Entity* enemy = new Enemy();
+	{
+		std::cout << "Shared Pointers\n";
+		std::array<std::shared_ptr<Vector2>, 1000> SharedPtrs;
+		Timer timer;
+		for (int i = 0; i < SharedPtrs.size(); i++)
+		{
+			SharedPtrs[i] = std::make_shared<Vector2>();
+		}
+	}
 
-	Player* p0 = dynamic_cast<Player*>(player); // it will return actuall player pointer and store it.
-	Player* p1 = dynamic_cast<Player*>(enemy); // it will return nullptr and is not valid.
+	{
+		std::cout << "Shared Pointers with New\n";
+		std::array<std::shared_ptr<Vector2>, 1000> SharedPtrs2;
+		
+		Timer timer; // start to measure from here
+		for (int i = 0; i < SharedPtrs2.size(); i++)
+		{
+			SharedPtrs2[i] = std::shared_ptr<Vector2>(new Vector2());
+		} // destruct the timer and calc the taken time
+	}
 
-	std::cin.get();
+	{
+		std::cout << "Unique Pointers\n";
+
+		std::array<std::unique_ptr<Vector2>, 1000> UniquePtrs;
+		Timer timer;
+		for (int i = 0; i < UniquePtrs.size(); i++)
+		{
+			UniquePtrs[i] = std::make_unique<Vector2>();
+		}
+	}
 }
