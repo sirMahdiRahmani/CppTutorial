@@ -15,4 +15,5 @@
 #include <chrono>
 #include <fstream>
 #include <optional>
+#include <cstdio>
 #include "Timer.h"
