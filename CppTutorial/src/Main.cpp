@@ -1,34 +1,23 @@
 #include "pch.h"
 
-std::optional<std::string> ReadFile(const std::string& filePath)
-{
-	std::ifstream stream(filePath);
-	if (stream) 
-	{
-		
-		std::string result;
-
-		std::getline(stream, result);
-		stream.close();
-		return result;
-	}
-
-	return std::nullopt;
-}
-
 int main()
 {
-	std::optional<std::string> data = ReadFile("D:/Projects/sirMahdiRahmani/CppTutorial/CppTutorial/src/file.text");
-	auto text = data.value(); // or data.value().
+	int size;
+	int* index = new int;
+	std::cin >> size;
 
-	if (data.has_value())
+	int* array = new int[size];
+
+	for (int i = 0; i < size; i++)
 	{
-		std::cout << "Successful!" << std::endl;
-	}
-	else
-	{
-		std::cout << "Not Successful!" << std::endl;
+		std::cin >> *index;
+		array[i] = int(*index);
 	}
 
-	std::cout << text << std::endl;
+	for (int i = size - 1; i >= 0; i--)
+	{
+		std::cout << array[i] << " ";
+	}
+	delete[] array;
+
 }
