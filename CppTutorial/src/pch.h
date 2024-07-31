@@ -16,4 +16,5 @@
 #include <fstream>
 #include <optional>
 #include <cstdio>
+#include <variant>
 #include "Timer.h"

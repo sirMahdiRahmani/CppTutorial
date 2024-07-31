@@ -1,23 +1,22 @@
 #include "pch.h"
 
-int main()
-{
-	int size;
-	int* index = new int;
-	std::cin >> size;
+int main() {
+	std::variant<int, float, std::string> myVariant;
 
-	int* array = new int[size];
+	myVariant = 42;
+	std::cout << "Holds int: " << std::get<int>(myVariant) << std::endl;
 
-	for (int i = 0; i < size; i++)
-	{
-		std::cin >> *index;
-		array[i] = int(*index);
-	}
+	myVariant = 3.14f;
+	std::cout << "Holds float: " << std::get<float>(myVariant) << std::endl;
 
-	for (int i = size - 1; i >= 0; i--)
-	{
-		std::cout << array[i] << " ";
-	}
-	delete[] array;
+	myVariant = "Hello";
+	std::cout << "Holds string: " << std::get<std::string>(myVariant) << std::endl;
 
+	// Using std::visit to handle the current value
+	std::visit([](auto&& arg)
+		{
+			std::cout << "Current value: " << arg << std::endl;
+		}, myVariant);
+
+	return 0;
 }
