@@ -1,22 +1,44 @@
 #include "pch.h"
 
-int main() {
-	std::variant<int, float, std::string> myVariant;
+static uint32_t s_AllocCount = 0;
 
-	myVariant = 42;
-	std::cout << "Holds int: " << std::get<int>(myVariant) << std::endl;
+void* operator new(size_t size)
+{
+	s_AllocCount++;
+	std::cout << "Allocating " << size << " Bytes\n";
+	return malloc(size);
+}
 
-	myVariant = 3.14f;
-	std::cout << "Holds float: " << std::get<float>(myVariant) << std::endl;
+#define STRING_VIEW 1
 
-	myVariant = "Hello";
-	std::cout << "Holds string: " << std::get<std::string>(myVariant) << std::endl;
+#if STRING_VIEW
+void printName(std::string_view name) 
+{
+	std::cout << name << std::endl;
+}
+#else
+void printName(const std::string& name) 
+{
+	std::cout << name << std::endl;
+}
+#endif
 
-	// Using std::visit to handle the current value
-	std::visit([](auto&& arg)
-		{
-			std::cout << "Current value: " << arg << std::endl;
-		}, myVariant);
 
-	return 0;
+
+int main() 
+{	
+	std::string fullName = "Jurgen Klopp";
+
+#if STRING_VIEW
+	std::string_view firstName(fullName.c_str(), 6);
+	std::string_view lastName(fullName.c_str() + 7, 5);
+#else
+	std::string firstName = name.substr(0, 5);
+	std::string lastName = name.substr(6, 7);
+#endif
+
+	printName(firstName);
+	printName(lastName);
+
+	std::cout << "Allocating " << s_AllocCount;
 }

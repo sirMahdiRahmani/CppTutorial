@@ -17,4 +17,5 @@
 #include <optional>
 #include <cstdio>
 #include <variant>
+#include <future>
 #include "Timer.h"
