@@ -20,3 +20,17 @@
 #include <future>
 #include "Timer.h"
 #include "Instrumentor.h"
+
+#define PROFILING 1
+
+#if PROFILING
+
+#define PROFILE_SCOPE(name) InstrumentationTimer timer ##__LINE__(name)
+#define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCTION__)
+
+#else
+
+#define PROFILE_SCOPE(name)
+#define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCTION__)
+
+#endif
