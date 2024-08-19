@@ -24,7 +24,6 @@ void printName(const std::string& name)
 #endif
 
 
-
 int main() 
 {	
 	std::string fullName = "Jurgen Klopp";
@@ -33,8 +32,8 @@ int main()
 	std::string_view firstName(fullName.c_str(), 6);
 	std::string_view lastName(fullName.c_str() + 7, 5);
 #else
-	std::string firstName = name.substr(0, 5);
-	std::string lastName = name.substr(6, 7);
+	std::string firstName = fullName.substr(0, 6);
+	std::string lastName = fullName.substr(7, 5);
 #endif
 
 	printName(firstName);
