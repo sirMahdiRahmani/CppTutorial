@@ -14,37 +14,42 @@
 
 #endif
 
-void Function1() 
-{
-	PROFILE_FUNCTION();
 
-	for (int i = 0; i < 10000; i++) 
+namespace BenchMark
+{
+	void Function1()
 	{
-		std::cout << "Hello\n";
+		PROFILE_FUNCTION();
+
+		for (int i = 0; i < 10000; i++)
+		{
+			std::cout << "Hello\n";
+		}
+	}
+	void Function2()
+	{
+		PROFILE_FUNCTION();
+
+		for (int i = 0; i < 10000; i++)
+		{
+			std::cout << "Hello\n";
+		}
+	}
+
+	void RunBenchMark()
+	{
+		PROFILE_FUNCTION();
+		std::cout << "Run Bench\n";
+		Function1();
+		Function2();
 	}
 }
-void Function2() 
+
+
+int main()
 {
-	PROFILE_FUNCTION();
-
-	for (int i = 0; i < 10000; i++) 
-	{
-		std::cout << "Hello\n";
-	}
-}
-
-void Bench()
-{
-	PROFILE_FUNCTION();
-	std::cout << "Run Bench\n";
-	Function1();
-	Function2();
-}
-
-int main() 
-{	
 	Instrumentor::Get().BeginSession("Main");
-	Bench();
+	BenchMark::RunBenchMark();
 	Instrumentor::Get().EndSession();
 }
 
