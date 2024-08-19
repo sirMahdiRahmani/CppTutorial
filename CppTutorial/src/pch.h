@@ -19,3 +19,4 @@
 #include <variant>
 #include <future>
 #include "Timer.h"
+#include "Instrumentor.h"
