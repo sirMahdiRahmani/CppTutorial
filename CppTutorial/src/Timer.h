@@ -3,9 +3,10 @@
 
 struct Timer
 {
+    std::string JobName;
     std::chrono::time_point<std::chrono::steady_clock> startPoint, endPoint;
 
-    Timer();
+    Timer(const char* jobname);
 
     ~Timer();
 };

@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "Timer.h"
 
-Timer::Timer()
+Timer::Timer(const char* jobname)
 {
+	Timer::JobName = jobname;
 	Timer::startPoint = std::chrono::high_resolution_clock::now();
 }
 
@@ -16,5 +17,5 @@ Timer::~Timer()
 	auto duration = end - start;
 	double ms = duration * 0.001;
 	double s = duration * 0.000001;
-	std::cout << s << " Seconds | " << ms << " Miliseconds | " << duration << " Microseconds" << std::endl;
+	std::cout << Timer::JobName << ": " << s << " Seconds | " << ms << " Miliseconds | " << duration << " Microseconds" << std::endl;
 }
