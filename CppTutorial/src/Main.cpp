@@ -33,8 +33,10 @@ namespace BenchMark
 
 int main()
 {
-	Instrumentor::Get().BeginSession("Main");
+	Instrumentor::Get().BeginSession("Main"); // Start Instumentor to create file and start time
+
 	BenchMark::RunBenchMark();
-	Instrumentor::Get().EndSession();
+	
+	Instrumentor::Get().EndSession(); // Stop Instumentor to Ending file and stop time
 }
 
