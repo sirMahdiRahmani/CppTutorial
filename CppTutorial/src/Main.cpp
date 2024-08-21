@@ -1,42 +1,28 @@
 #include "pch.h"
 
-namespace BenchMark
+
+class Random
 {
-	void Function1()
+public:
+	static Random& Get()
 	{
-		PROFILE_FUNCTION();
-
-		for (int i = 0; i < 10000; i++)
-		{
-			std::cout << "Hello\n";
-		}
-	}
-	void Function2()
-	{
-		PROFILE_FUNCTION();
-
-		for (int i = 0; i < 10000; i++)
-		{
-			std::cout << "Hello\n";
-		}
+		static Random s_Instance;
+		return s_Instance;
 	}
 
-	void RunBenchMark()
+	float Float()
 	{
-		PROFILE_FUNCTION();
-		std::cout << "Run Bench\n";
-		Function1();
-		Function2();
+		return RandomNumber;
 	}
-}
-
+private:
+	float RandomNumber = 0.4f;
+	Random() {};
+};
 
 int main()
 {
 	Instrumentor::Get().BeginSession("Main"); // Start Instumentor to create file and start time
-
-	BenchMark::RunBenchMark();
-	
-	Instrumentor::Get().EndSession(); // Stop Instumentor to Ending file and stop time
+	Random& random = Random::Get();
+	std::cout << random.Float();
+	Instrumentor::Get().EndSession();         // Stop Instumentor to Ending file and stop time
 }
-
