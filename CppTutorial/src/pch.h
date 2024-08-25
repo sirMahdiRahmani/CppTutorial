@@ -20,6 +20,7 @@
 #include <future>
 #include "Timer.h"
 #include "Instrumentor.h"
+#include "AllocationMetrics.h"
 
 #define PROFILING 1
 
