@@ -1,13 +1,17 @@
 #include "pch.h"
 
-
 template <typename T, size_t S>
 class Array
 {
 public:
-	contexsr int Size()
+	int Size()
 	{
-		return
+		return S;
+	}
+
+	T& operator[] (unsigned int index)
+	{
+		return Data[index];
 	}
 private:
 	T Data[S];
@@ -16,6 +20,11 @@ private:
 
 int main()
 {
-	std::array <int, 5> myArray {1, 2, 5, 5, 6};
-	std::cout << myArray[0];
+	Array<int, 5> myArray;
+	int count = 0;
+	for (int i = 0; i < myArray.Size(); i++)
+	{
+		myArray[i] = count++;
+		std::cout << myArray[i] << std::endl;
+	}
 }
