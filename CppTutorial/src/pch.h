@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <vector>
-#include <array>
+//#include <array>
 #include <string>
 #include <map>
 #include <set>
@@ -21,6 +21,7 @@
 #include "Timer.h"
 #include "Instrumentor.h"
 #include "AllocationMetrics.h"
+#include "Array.h"
 
 #define PROFILING 1
 

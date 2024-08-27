@@ -180,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AllocationMetrics.h" />
+    <ClInclude Include="src\Array.h" />
     <ClInclude Include="src\Instrumentor.h" />
     <ClInclude Include="src\Log.h" />
     <ClInclude Include="src\pch.h" />
