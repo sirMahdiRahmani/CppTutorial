@@ -22,6 +22,7 @@
 #include "Instrumentor.h"
 #include "AllocationMetrics.h"
 #include "Array.h"
+#include "Vector.h"
 
 #define PROFILING 1
 

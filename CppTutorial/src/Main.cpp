@@ -1,69 +1,83 @@
 #include "pch.h"
 
-class Vector
+
+struct Vector3
 {
-public:
+	float x = 0.0f, y = 0.0f, z = 0.0f;
 
-	Vector()
+	Vector3() {}
+	Vector3(float scalar)
+		: x(scalar), y(scalar), z(scalar) {}
+	Vector3(float X, float Y, float Z)
+		: x(X), y(Y), z(Z) {}
+
+	Vector3(const Vector3& other)
+		: x(other.x), y(other.y), z(other.z)
 	{
-		std::cout << "New size of Vector: " << sizeof(VectorData) / sizeof(int) << std::endl;
-
+		std::cout << "Copy Vector3 ----------\n";
 	}
 
-	void Add(int data)
+	Vector3(Vector3&& other)
+		: x(other.x), y(other.y), z(other.z)
 	{
-		if (size <= sizeof(VectorData) / sizeof(int))
-		{
-			size++;
-
-			VectorTemp = new int[size];
-
-			for (int i = 0; i < sizeof(VectorData) / sizeof(int); i++)
-			{
-				VectorTemp[i] = VectorData[i];
-			}
-			VectorTemp[size + 1] = data;
-			delete[] VectorData;
-			VectorData = new int[size];
-			VectorData = VectorTemp;
-			delete[] VectorTemp;
-		}
+		std::cout << "Move Vector3 ----------\n";
+	}
+	~Vector3()
+	{
+		std::cout << "Destroy Vector3 ----------\n";
 	}
 
-	void Reserve(int AddedSize)
+	Vector3& operator=(const Vector3& other)
 	{
-		size += AddedSize;
-
-		VectorTemp = new int[size];
-		for (int i = 0; i < sizeof(VectorData) / sizeof(int) - 1; i++)
-		{
-			VectorTemp[i] = VectorData[i];
-		}
-		delete[] VectorData;
-		VectorData = new int[size];
-		VectorData = VectorTemp;
-		delete[] VectorTemp;
-
-		std::cout << "New size of Vector: " << sizeof(VectorData) / sizeof(int) << std::endl;
+		std::cout << "Copied\n";
+		x = other.x;
+		y = other.y;
+		z = other.z;
+		return *this;
 	}
 
-private:
-	int size = 1;
-	int* VectorData = new int[1];
-	int* VectorTemp = new int[1];
+	Vector3& operator=(Vector3&& other)
+	{
+		std::cout << "Moved\n";
+		x = other.x;
+		y = other.y;
+		z = other.z;
+		return *this;
+	}
 };
 
 
+template<typename T>
+void PrintVector(const Vector<T>& vector)
+{
+	for (size_t i = 0; i < vector.Size(); i++)
+	{
+		std::cout << vector[i] << std::endl;
+	}
+	std::cout << "------------------------" << std::endl;
+}
+
+template<>
+void PrintVector(const Vector<Vector3>& vector)
+{
+	for (size_t i = 0; i < vector.Size(); i++)
+	{
+		std::cout << vector[i].x << ", " << vector[i].y << ", " << vector[i].z << std::endl;
+	}
+	std::cout << "------------------------" << std::endl;
+}
+
 int main()
 {
-	std::vector<int> ListOfInt;
+	{
+		Vector<Vector3> vector;
+		vector.EmplaceBack(1.2f);
+		vector.PushBack(Vector3(2.0f, 3.4f, 7.0f));
+		vector.PushBack(Vector3());
 
-	ListOfInt.push_back(1);
-
-	ListOfInt.push_back(1);
-
-	std::string* name = new std::string("Mahdi");
-
-	ListOfInt.push_back(2);
-
+		PrintVector(vector);
+		PrintMemoryUsage();
+		vector.Clear();
+	}
+	PrintMemoryUsage();
 }
