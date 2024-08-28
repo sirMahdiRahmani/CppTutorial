@@ -108,3 +108,13 @@ private:
 	size_t m_Capacity = 0;
 	T* m_Data = nullptr;
 };
+
+template<typename T>
+void PrintVector(const Vector<T>& vector)
+{
+	for (size_t i = 0; i < vector.Size(); i++)
+	{
+		std::cout << vector[i] << std::endl;
+	}
+	std::cout << "------------------------" << std::endl;
+}

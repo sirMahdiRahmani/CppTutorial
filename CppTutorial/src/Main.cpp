@@ -46,27 +46,6 @@ struct Vector3
 	}
 };
 
-
-template<typename T>
-void PrintVector(const Vector<T>& vector)
-{
-	for (size_t i = 0; i < vector.Size(); i++)
-	{
-		std::cout << vector[i] << std::endl;
-	}
-	std::cout << "------------------------" << std::endl;
-}
-
-template<>
-void PrintVector(const Vector<Vector3>& vector)
-{
-	for (size_t i = 0; i < vector.Size(); i++)
-	{
-		std::cout << vector[i].x << ", " << vector[i].y << ", " << vector[i].z << std::endl;
-	}
-	std::cout << "------------------------" << std::endl;
-}
-
 int main()
 {
 	{
